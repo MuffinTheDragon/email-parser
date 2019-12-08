@@ -1,0 +1,20 @@
+StartEmail
+
+To: tcruise@mi.com
+From: mifan@gmail.com
+
+
+Subject: How many more MI's?
+
+
+	Hi Tom,
+	
+	As an avid MI fan, I am wondering how many more movies you're going to do. Are all these stunts really
+	safe to do? Are you really a human? 
+
+	A very concerened fan.
+
+
+EndBody
+
+EndEmail

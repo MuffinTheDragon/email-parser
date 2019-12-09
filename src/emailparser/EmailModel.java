@@ -26,11 +26,11 @@ public class EmailModel {
 	}
 	
 	public void setAddressFrom(String addressFrom) {
-		this.setAddressFrom(addressFrom);
+		this.addressFrom = addressFrom;
 	}
 	
 	public void setSubject(String subject) {
-		this.setSubject(subject);
+		this.subject = subject;
 	}
 	
 	public void setBody(String body) {

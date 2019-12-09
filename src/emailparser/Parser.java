@@ -36,7 +36,7 @@ public class Parser {
 		return this.errorMessage;
 	}
 
-	public boolean parse(BufferedReader inputStream) {
+	public boolean parse(BufferedReader inputStream, EmailModel em) {
 		this.errorMessage = "";
 
 		try {
@@ -71,6 +71,7 @@ public class Parser {
 						if (m.matches()) {
 							state = 2;
 							// store address to
+							em.setAddressTo(l.substring(3));
 							break;
 						}
 						error("Expected addressed to");
@@ -83,6 +84,7 @@ public class Parser {
 						if (m.matches()) {
 							state = 3;
 							// store address from
+							em.setAddressFrom(l.substring(5));
 							break;
 						}
 						error("Expected addressed from");
@@ -94,6 +96,7 @@ public class Parser {
 						if (m.matches()) {
 							state = 4;
 							// store subject
+							em.setSubject(l.substring(8));
 							break;
 						}
 						error("Expected subject line");
@@ -104,6 +107,7 @@ public class Parser {
 						m = body.matcher(l);
 						if (m.matches() && !endBody.matcher(l).matches()) {
 							// store message
+							em.setBody(l);
 							break;
 						}
 						state = 5; // end of body message
@@ -145,6 +149,7 @@ public class Parser {
 	
 	
 	public static void main(String[] args) {
+		EmailModel em = new EmailModel();
 		Parser p = new Parser();
 		BufferedReader inputStream = null;
 		try {
@@ -153,6 +158,6 @@ public class Parser {
 			e.printStackTrace();
 		}
 		System.out.println(p.getErrorMessage());
-		System.out.println(p.parse(inputStream));
+		System.out.println(p.parse(inputStream, em));
 	}
 }

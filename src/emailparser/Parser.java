@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 
 /**
- * This file contains a basic parser which uses regex's to read from an input
+ * This module contains a basic parser which uses regex's to read from an input
  * file and parse data in a typical e-mail.
  * 
  * @author Dhaval
@@ -26,16 +26,25 @@ public class Parser {
 
 	private Pattern subject = Pattern.compile("^Subject:.*$");
 	private Pattern body = Pattern.compile("^.*$");
+	private Pattern space = Pattern.compile("^\\s*$");
 	private Pattern endBody = Pattern.compile("^EndBody$");
 
 	private void error(String message) {
 		this.errorMessage = "Error in line " + this.lineNumber + ": " + message;
 	}
 
-	private String getErrorMessage() {
+	public String getErrorMessage() {
 		return this.errorMessage;
 	}
-
+	
+	/**
+	 * Parse the content given in a file that follows a particular structure.
+	 * As the content is parsed, it is stored into the model.
+	 * 
+	 * @param inputStream : File to parse data from
+	 * @param em : model that stores parsed data
+	 * @return true if the file is successfully parsed
+	 */
 	public boolean parse(BufferedReader inputStream, EmailModel em) {
 		this.errorMessage = "";
 
@@ -49,8 +58,10 @@ public class Parser {
 //				l = l.replaceAll("\\s+", "");
 				System.out.println(this.lineNumber + " " + l + " state:" + state);
 				this.lineNumber++;
-
-				if (!l.equals("")) {
+				
+				// skip empty lines if its not part of body message. Otherwise, 
+				// copy the newlines when reading body message.
+				if (!l.equals("") || state == 4) {
 
 					switch (state) {
 					case 0:
@@ -104,7 +115,12 @@ public class Parser {
 
 					case 4:
 						// read body message
-						m = body.matcher(l);
+						m = space.matcher(l);
+						if (m.matches()) {
+							em.setBody("\n");
+							break;
+						}
+						m = body.matcher(l);						
 						if (m.matches() && !endBody.matcher(l).matches()) {
 							// store message
 							em.setBody(l);
@@ -136,7 +152,6 @@ public class Parser {
 
 					}
 				}
-
 			}
 
 			return state == 7;
@@ -147,7 +162,10 @@ public class Parser {
 		}
 	}
 	
-	
+	/**
+	 * Quick way to test out a file without running the entire application.
+	 * 
+	 */
 	public static void main(String[] args) {
 		EmailModel em = new EmailModel();
 		Parser p = new Parser();

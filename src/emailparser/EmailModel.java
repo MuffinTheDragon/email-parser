@@ -1,7 +1,5 @@
 package emailparser;
 
-import java.util.ArrayList;
-
 /**
  * This module stores the main information from the parser. 
  * @author Dhaval
@@ -41,5 +39,4 @@ public class EmailModel {
 		String[] array = {this.addressTo, this.addressFrom, this.subject, this.body};
 		return array;
 	}
-
 }

@@ -127,6 +127,10 @@ public class View implements EventHandler<ActionEvent> {
 		MenuBar menuBar = new MenuBar();
 		MenuItem menuItem;
 		Menu menu = new Menu("File");
+		
+		menuItem = new MenuItem("New");
+		menuItem.setOnAction(this);
+		menu.getItems().add(menuItem);
 
 		menuItem = new MenuItem("Open");
 		menuItem.setOnAction(this);
@@ -197,6 +201,10 @@ public class View implements EventHandler<ActionEvent> {
 			} else {
 				System.out.println("Save cancelled." + "\n");
 			}
+			
+		} else if (input.equals("New")) {
+			this.setModel(new EmailModel());
+			this.rewrite();
 			
 		} else if (input.equals("Exit")) {
 			this.stage.close();

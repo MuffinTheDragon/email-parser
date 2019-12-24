@@ -3,6 +3,13 @@ package emailparser;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Launch the e-mail application. 
+ * 
+ * @author Dhaval
+ *
+ */
+
 public class Main extends Application {
 	
 	private EmailModel em;

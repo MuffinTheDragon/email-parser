@@ -1,0 +1,12 @@
+StartEmail
+
+To: test@test.test
+From: test@test.test
+
+
+Subject: Test
+	This is a test.
+
+EndBody
+
+EndEmail

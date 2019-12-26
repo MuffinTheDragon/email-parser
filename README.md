@@ -1,5 +1,5 @@
 # email-parser
-Parser written in Java to extract and organize e-mails from an input file. User can write an e-mail using the application and save it into a file. User can also open a file and display its contents in the application.
+Parser written in Java to extract and organize e-mails from an input file. User can write an e-mail using the application and save it into a file. User can also open a file and display its contents in the application. The save format below can also be found in the src folder.
 
 
 -------------------------------------------------------------------------------------
